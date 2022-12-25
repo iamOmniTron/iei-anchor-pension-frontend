@@ -1,7 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+
+
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const TOKEN_NAME = process.env.REACT_APP_TOKEN_NAME;
+
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [email,setEmail]= useState("");
+  const [password,setPassword] = useState("");
+
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    const {data:response} = await axios.post(`${SERVER_URL}/admin/login`,{email,password});
+    if(response.error){
+      console.log(response.error);
+      setEmail("");
+      setPassword("");
+      return;
+    }
+    if(!response.success){
+      console.log(response.message);
+      setEmail("");
+      setPassword("");
+      return;
+    }
+    localStorage.setItem(TOKEN_NAME,response.data);
+    navigate("/admin/daashboard");
+  }
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -17,7 +45,7 @@ export default function Login() {
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -27,6 +55,8 @@ export default function Login() {
                     </label>
                     <input
                       type="email"
+                      value={email}
+                      onChange={(e)=>setEmail(e.target.value)}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
                     />
@@ -40,6 +70,8 @@ export default function Login() {
                       Password
                     </label>
                     <input
+                      value={password}
+                      onChange={(e)=>setPassword(e.target.value)}
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
@@ -61,7 +93,7 @@ export default function Login() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Sign In
                     </button>
@@ -78,11 +110,6 @@ export default function Login() {
                 >
                   <small>Forgot password?</small>
                 </a>
-              </div>
-              <div className="w-1/2 text-right">
-                <Link to="/auth/register" className="text-blueGray-200">
-                  <small>Create new account</small>
-                </Link>
               </div>
             </div>
           </div>

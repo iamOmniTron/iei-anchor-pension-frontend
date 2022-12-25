@@ -19,6 +19,8 @@ import Dashboard from "./views/admin/Dashboard";
 import Maps from "./views/admin/Maps";
 import Tables from "./views/admin/Tables";
 import LandingSetting from "./views/admin/Landing";
+import About from "./views/About";
+import Login from "./views/auth/Login";
 
 
 export default function App(){
@@ -34,9 +36,12 @@ export default function App(){
             <Route path="landing" element={<LandingSetting/>}/>
             <Route path="*" exact element={<Navigate to="/admin/dashboard"/>}/>
             </Route>
-          <Route path="/auth" element={<Auth/>} />
+          <Route path="/auth" element={<Auth/>}>
+            <Route path="login" element={<Login/>}/>
+          </Route>
           {/* add routes without layouts */}
-          <Route path="/profile" exact element={<Profile/>} />
+          {/* <Route path="/profile" exact element={<Profile/>} /> */}
+          <Route path="/about" exact element={<About/>}/>
           <Route path="/" element={<Landing/>} />
           {/* add redirect for first page */}
           <Route path="/*" exact element={<Navigate to="/"/>}/>

@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 export default function FooterSmall(props) {
+
   return (
     <>
       <footer
@@ -25,37 +26,28 @@ export default function FooterSmall(props) {
             <div className="w-full md:w-8/12 px-4">
               <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
-                  <a
-                    href="https://www.creative-tim.com?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    Creative Tim
-                  </a>
+                  <Link to="/" className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">
+                    Home
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://www.creative-tim.com/presentation?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    About Us
-                  </a>
+                  <Link to="/about" className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">
+                    About
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="http://blog.creative-tim.com?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    Blog
-                  </a>
+                  <Link to="/contact" className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">
+                    Contact
+                  </Link>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer-small"
                     className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
                   >
                     MIT License
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

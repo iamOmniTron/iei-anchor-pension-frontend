@@ -342,7 +342,7 @@ export default function Landing() {
               {
                 reviews !== [] && reviews.map((review,idx)=>{
                   return(
-                    <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4" key={idx}>
+                    <div className="w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 px-4" key={idx}>
                 <div className="px-6">
                   <div className="pt-6 text-center">
 
